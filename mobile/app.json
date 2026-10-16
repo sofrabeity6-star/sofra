@@ -1,0 +1,51 @@
+{
+  "expo": {
+    "name": "سفرة / بيتي",
+    "slug": "sofra",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "scheme": "sofra",
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.sofra.app",
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "لاختيار صورة إيصال التحويل",
+        "NSCameraUsageDescription": "لتصوير إيصال التحويل"
+      }
+    },
+    "android": {
+      "package": "com.sofra.app"
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "single",
+      "name": "سفرة / بيتي",
+      "lang": "ar",
+      "dir": "rtl"
+    },
+    "plugins": [
+      "expo-secure-store",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "لاختيار صورة إيصال التحويل",
+          "cameraPermission": "لتصوير إيصال التحويل"
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "color": "#0E5F55",
+          "defaultChannel": "default"
+        }
+      ]
+    ],
+    "extra": {
+      "apiUrl": "",
+      "eas": {
+        "projectId": ""
+      }
+    }
+  }
+}

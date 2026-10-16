@@ -1,0 +1,34 @@
+{
+  "name": "sofra",
+  "version": "1.0.0",
+  "description": "سفرة / بيتي: منصة طلب وجبات مطبخ منزلي — تطبيق واحد (أندرويد + آيفون + ويب + لوحة الإدارة) وخادم Node على Supabase",
+  "main": "src/server.js",
+  "scripts": {
+    "setup": "npm install && npm --prefix mobile install",
+    "start": "node --env-file-if-exists=.env --disable-warning=ExperimentalWarning src/server.js",
+    "dev": "node --env-file-if-exists=.env --disable-warning=ExperimentalWarning --watch src/server.js",
+    "app": "npm --prefix mobile start",
+    "build": "npm --prefix mobile ci --no-audit --no-fund && npm --prefix mobile run build:web",
+    "build:web": "npm --prefix mobile run build:web",
+    "test": "node --disable-warning=ExperimentalWarning --test --test-concurrency=4 test/*.test.js",
+    "test:app": "npm --prefix mobile test",
+    "test:all": "npm test && npm run test:app",
+    "seed:demo": "node --env-file-if-exists=.env --disable-warning=ExperimentalWarning scripts/seed-demo.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.7.0",
+    "helmet": "^8.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.4.0",
+    "pg": "^8.23.1",
+    "zod": "^4.6.5"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=22.13"
+  }
+}

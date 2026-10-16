@@ -1,0 +1,37 @@
+# Render Blueprint: من لوحة Render اختر New ← Blueprint واربط ريبو GitHub، وسيقرأ هذا الملف تلقائياً.
+# القيم المكتوب عليها sync: false سيطلبها منك Render أثناء الإنشاء: انسخها من ملف .env عندك.
+services:
+  - type: web
+    name: sofra
+    runtime: node
+    plan: free
+    region: frankfurt          # الأقرب لقاعدة Supabase (eu-west-1 أيرلندا)
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /healthz
+    autoDeploy: true           # كل push على GitHub ينشر نسخة جديدة
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: NODE_ENV
+        value: production
+      - key: TRUST_PROXY
+        value: "1"
+      - key: DATABASE_URL
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: CRON_SECRET
+        sync: false
+      - key: ADMIN_PHONE
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: ADMIN_NAME
+        value: مدير المطبخ
+      - key: EXPO_ACCESS_TOKEN
+        sync: false
