@@ -8,3 +8,5 @@ mobile/.expo/
 mobile/.env
 *.log
 .DS_Store
+sofra-*.apk
+*.apk

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><rect width="1024" height="1024" fill="#0E5F55"/><g transform="translate(512 512) scale(1) translate(-512 -480)">  <!-- البخار -->
+  <g fill="none" stroke="#FFF4D6" stroke-width="22" stroke-linecap="round">
+    <path d="M430 300 c-30 -40 30 -70 0 -120"/>
+    <path d="M512 290 c-30 -45 30 -80 0 -135"/>
+    <path d="M594 300 c-30 -40 30 -70 0 -120"/>
+  </g>
+  <!-- غطاء الطبق (القبة) -->
+  <path d="M262 640 a250 250 0 0 1 500 0 z" fill="#F2B635"/>
+  <path d="M330 600 a185 185 0 0 1 120 -150" fill="none" stroke="#FFE08A" stroke-width="20" stroke-linecap="round" opacity=".9"/>
+  <!-- المقبض -->
+  <rect x="482" y="352" width="60" height="44" rx="18" fill="#F2B635"/>
+  <!-- الصينية -->
+  <rect x="212" y="652" width="600" height="56" rx="28" fill="#F2B635"/>
+  <rect x="300" y="722" width="424" height="26" rx="13" fill="#C98F12"/>
+</g></svg>

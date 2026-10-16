@@ -15,7 +15,7 @@
     "test:all": "npm test && npm run test:app",
     "seed:demo": "node --env-file-if-exists=.env --disable-warning=ExperimentalWarning scripts/seed-demo.js",
     "expo:login": "node mobile/scripts/eas.js login",
-    "apk": "node mobile/scripts/eas.js build --platform android --profile preview"
+    "apk": "node mobile/scripts/eas.js apk"
   },
   "keywords": [],
   "author": "",

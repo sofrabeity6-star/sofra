@@ -15,14 +15,20 @@
       }
     },
     "android": {
-      "package": "com.sofra.app"
+      "package": "com.sofra.app",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "monochromeImage": "./assets/adaptive-icon-mono.png",
+        "backgroundColor": "#0E5F55"
+      }
     },
     "web": {
       "bundler": "metro",
       "output": "single",
       "name": "سفرة / بيتي",
       "lang": "ar",
-      "dir": "rtl"
+      "dir": "rtl",
+      "favicon": "./assets/favicon.png"
     },
     "plugins": [
       "expo-secure-store",
@@ -46,6 +52,7 @@
       "eas": {
         "projectId": "0bd1ac2b-73b5-4710-9be1-37e628cd9a8d"
       }
-    }
+    },
+    "icon": "./assets/icon.png"
   }
 }
