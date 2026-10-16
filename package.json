@@ -13,7 +13,9 @@
     "test": "node --disable-warning=ExperimentalWarning --test --test-concurrency=4 test/*.test.js",
     "test:app": "npm --prefix mobile test",
     "test:all": "npm test && npm run test:app",
-    "seed:demo": "node --env-file-if-exists=.env --disable-warning=ExperimentalWarning scripts/seed-demo.js"
+    "seed:demo": "node --env-file-if-exists=.env --disable-warning=ExperimentalWarning scripts/seed-demo.js",
+    "expo:login": "node mobile/scripts/eas.js login",
+    "apk": "node mobile/scripts/eas.js build --platform android --profile preview"
   },
   "keywords": [],
   "author": "",
