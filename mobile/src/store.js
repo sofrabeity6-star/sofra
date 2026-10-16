@@ -80,7 +80,16 @@ export function AppProvider({ children }) {
     setBoot('loading');
     try {
       await API.initApi();
-      const c = await API.api('GET', '/api/config', { quiet: true });
+      // الخادم المجاني على Render ينام عند عدم الاستخدام ويحتاج حتى دقيقة ليستيقظ: ننتظر ونعيد المحاولة تلقائياً
+      let c;
+      for (let i = 0; ; i++) {
+        try { c = await API.api('GET', '/api/config', { quiet: true, timeout: 70000 }); break; }
+        catch (e) {
+          const waking = e.code === 'offline' || e.status === 502 || e.status === 503 || e.status === 504;
+          if (!waking || i >= 2) throw e;
+          await new Promise((r) => setTimeout(r, 3000));
+        }
+      }
       setClock(c.timezone, c.now); setCfg(c);
       setMenu(await API.api('GET', '/api/menu', { quiet: true }));
       const tk = await secure.get(TOKEN_KEY);

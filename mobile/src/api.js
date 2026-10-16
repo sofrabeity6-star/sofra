@@ -45,14 +45,14 @@ export class ApiError extends Error {
   constructor(message, status, code) { super(message); this.status = status; this.code = code; }
 }
 
-export async function api(method, path, { json, form, quiet } = {}) {
+export async function api(method, path, { json, form, quiet, timeout = 25000 } = {}) {
   const headers = { 'X-Requested-With': 'sofra', Accept: 'application/json' };
   if (token) headers.Authorization = `Bearer ${token}`;
   const init = { method, headers };
   if (json !== undefined) { headers['Content-Type'] = 'application/json'; init.body = JSON.stringify(json); }
   if (form) init.body = form;
   const ctl = typeof AbortController !== 'undefined' ? new AbortController() : null;
-  const timer = ctl && setTimeout(() => ctl.abort(), 25000);
+  const timer = ctl && setTimeout(() => ctl.abort(), timeout);
   if (ctl) init.signal = ctl.signal;
   let res;
   try {
