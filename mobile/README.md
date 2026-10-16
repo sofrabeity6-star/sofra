@@ -39,7 +39,7 @@
 
 ## للإنتاج
 
-- ضع عنوان خادمك الحقيقي (**HTTPS إلزامي** في نسخ المتاجر): `EXPO_PUBLIC_API_URL=https://sofra.onrender.com` (رابط خدمتك على Render) في `mobile/.env` (انظر `.env.example`).
+- ضع عنوان خادمك الحقيقي (**HTTPS إلزامي** في نسخ المتاجر): مضبوط في `mobile/eas.json` على `https://sofra-3m0f.onrender.com` لنسخ preview وproduction (غيّره هناك لو تغيّر رابط Render).
 - أضف أيقونة التطبيق وشاشة البداية في `app.json` (`icon`, `splash`) قبل النشر على المتاجر.
 - البناء والنشر على App Store / Google Play عبر **EAS**: `npm i -g eas-cli && eas build -p android` (و`-p ios`) ويتطلب حساب Expo (وحساب Apple Developer للآيفون).
 - على الخادم: اضبط `CORS_ORIGINS` فقط إذا استضفت نسخة الويب من التطبيق على نطاق مختلف (التطبيقات الأصلية لا تحتاج CORS).

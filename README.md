@@ -42,7 +42,7 @@ npm run test:app       # اختبارات التطبيق
    البناء: `npm ci && npm run build` (يبني نسخة الويب من كود التطبيق)، والتشغيل: `npm start`، وفحص الصحة: `/healthz`.
 3. **Supabase**: لا يحتاج إعداداً يدوياً. استخدم رابط **Transaction pooler** (المنفذ 6543) في `DATABASE_URL` لأن Render لا يدعم IPv6.
 4. **إيقاظ الخادم المجاني**: خطة Render المجانية تنام بعد 15 دقيقة. أضف في GitHub ← Settings ← Secrets ← Actions: `SOFRA_URL` (رابط Render) و`CRON_SECRET`، فيستدعي `.github/workflows/cron.yml` الخادم كل 10 دقائق ويشغّل التجهيز التلقائي.
-5. **تطبيق الموبايل**: ضع رابط Render في `mobile/.env` كـ `EXPO_PUBLIC_API_URL=https://...onrender.com` قبل بناء نسخ المتاجر بـ EAS.
+5. **تطبيق الموبايل**: رابط الخادم (`https://sofra-3m0f.onrender.com`) مضبوط في `mobile/eas.json`، فنسخ EAS (preview / production) تتصل به تلقائياً.
 
 **Docker** (بديل): `docker compose up -d --build` يبني الويب والخادم في صورة واحدة ويقرأ `.env`.
 
