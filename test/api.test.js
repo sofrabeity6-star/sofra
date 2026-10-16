@@ -724,3 +724,14 @@ test('تخزين Supabase: إنشاء المساحات، الرفع، القرا
   assert.equal(await s.get('receipts', name), null);
   await assert.rejects(() => s.put('menu', '../evil.png', Buffer.from('x')));
 });
+
+test('cron-job.org: المهمة الدورية تقبل POST وجسماً فارغاً أو غير صالح', async () => {
+  const t = await boot();
+  try {
+    const r1 = await fetch(t.base + '/api/cron/tick?key=test-cron-secret', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '' });
+    assert.equal(r1.status, 200);
+    const r2 = await fetch(t.base + '/api/cron/tick?key=test-cron-secret', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{bad' });
+    assert.equal(r2.status, 200);
+    assert.equal((await fetch(t.base + '/api/cron/tick?key=nope', { method: 'POST' })).status, 403);
+  } finally { await t.close(); }
+});

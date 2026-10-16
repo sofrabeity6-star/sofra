@@ -51,6 +51,14 @@ function createApp({ db, clock = { now: () => new Date() }, dataDir = config.dat
     }
     next();
   });
+  // مهمة دورية (التجهيز التلقائي) يستدعيها مجدول خارجي (cron-job.org)، لأن خادم Render المجاني ينام عند عدم الاستخدام.
+  // تقبل GET وPOST وتتجاهل أي جسم للطلب، وتوضع قبل قراءة JSON حتى لا يرفضها جسم فارغ أو غير صالح.
+  app.all('/api/cron/tick', (req, res, next) => {
+    const key = String(req.query.key || req.headers['x-cron-secret'] || '').trim();
+    const ok = cronSecret && key.length === cronSecret.length && crypto.timingSafeEqual(Buffer.from(key), Buffer.from(cronSecret));
+    if (!ok) return res.status(403).json({ error: { message: 'غير مصرح', code: 'forbidden' } });
+    svc.autoPrepare().then((prepared) => res.json({ ok: true, prepared })).catch(next);
+  });
   app.use(express.json({ limit: '100kb' }));
 
   // فحص صحة الخادم وقاعدة البيانات (يستخدمه Render)
@@ -62,13 +70,6 @@ function createApp({ db, clock = { now: () => new Date() }, dataDir = config.dat
   const api = express.Router();
   const adm = express.Router();
   const cust = express.Router();
-  // مهمة دورية (التجهيز التلقائي) يستدعيها مجدول خارجي، لأن خادم Render المجاني ينام عند عدم الاستخدام
-  api.get('/cron/tick', h(async (req, res) => {
-    const key = String(req.query.key || req.headers['x-cron-secret'] || '');
-    const ok = cronSecret && key.length === cronSecret.length && crypto.timingSafeEqual(Buffer.from(key), Buffer.from(cronSecret));
-    if (!ok) throw new AppError(403, 'غير مصرح', 'forbidden');
-    res.json({ ok: true, prepared: await svc.autoPrepare() });
-  }));
   api.use(A.csrfGuard);
   adm.use(staffAuth.attach);
   cust.use(customerAuth.attach);
